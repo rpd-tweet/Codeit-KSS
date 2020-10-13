@@ -1,0 +1,64 @@
+		
+def findProduct(arr):
+  l = [0 for i in range(len(arr))]
+  r = [0 for i in range(len(arr))]
+  presum = [0 for i in range(len(arr))]
+  presum[0] = arr[0]
+
+  for i in range(1,len(arr)):
+     presum[i] = presum[i-1] + arr[i]
+  # left array
+  stack = []
+  for i in range(len(arr)):
+    while(len(stack)>0 and arr[stack[-1]]>=arr[i]):
+      stack.pop()
+    if len(stack)>0:
+      l[i] = stack[-1]+1
+    else:
+      l[i] = 0
+    stack.append(i)
+  #right array
+  stack = []
+  for i in range(len(arr)-1, -1, -1):
+    while(len(stack)>0 and arr[stack[-1]]>=arr[i]):
+      stack.pop()
+    if len(stack)>0:
+      r[i] = stack[-1]-1
+    else:
+      r[i] = len(arr)-1
+    stack.append(i)
+  #find max
+  mx = 0
+  temp = 0
+  val = 0
+  for i in range(len(arr)):
+    if l[i] == 0:
+      val = 0
+    else:
+      val = presum[l[i]-1] 
+    temp = arr[i] * (presum[r[i]] - val)
+    mx = max(mx, temp)
+  print(l, r)
+  return mx
+
+
+
+arr = [3, 1, 6, 4, 5, 2]
+print(findProduct(arr))
+
+'''
+Maximize product of subarray sum with its minimum element
+Given an array arr[] consisting of N positive integers, the task is to find the maximum product of subarray sum with the minimum element of that subarray.
+Examples:
+Input: arr[] = {3, 1, 6, 4, 5, 2}
+Output: 60
+Explanation:
+The required maximum product can be obtained using subarray {6, 4, 5}
+Therefore, maximum product = (6 + 4 + 5) * (4) = 60
+Input: arr[] = {4, 1, 2, 9, 3}
+Output: 81
+Explanation:
+The required maximum product can be obtained using subarray {9}
+Maximum product = (9)* (9) = 81
+
+'''
