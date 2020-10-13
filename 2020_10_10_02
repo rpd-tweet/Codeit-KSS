@@ -1,0 +1,17 @@
+def longestSubString(s):
+    dic = {}
+    mx = i = 0
+    for itr, s in enumerate(s):
+        if s in dic and i <= dic[s]:
+            i = dic[s]+1
+        else:
+            mx = max(mx, itr-i+1)
+        dic[s] = itr
+    return mx
+    
+s = "abcd"
+print(longestSubString(s))
+
+'''
+2.Given a string s, find the length of the longest substring without repeating characters
+'''
