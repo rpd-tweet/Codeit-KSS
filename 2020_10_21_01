@@ -1,0 +1,32 @@
+# time - O(vm) | space - O(V)
+
+import sys
+def findMinCoins(coins, v):
+  hash = [sys.maxsize for _ in range(v+1)]
+  hash[0] = 0
+  
+  for i in range(1, v+1):
+    for j in range(len(coins)):
+      if coins[j] <= i:
+        temp = hash[i - coins[j]]
+        if temp < sys.maxsize and temp + 1 < hash[i]:
+          hash[i] = temp + 1
+  return hash[v]
+
+
+
+coins = [9, 6, 5, 1]
+v = 11
+print(findMinCoins(coins, v))
+
+-------------------------------------------------------------------------------------------------------------
+Problem 1:  Find minimum number of coins that make a given value
+Given a value V, if we want to make change for V cents, and we have infinite supply of each of C = { C1, C2, .. , Cm} valued coins, what is the minimum number of coins to make the change?
+Examples 1
+Input: coins[] = {25, 10, 5}, V = 30
+Output: Minimum 2 coins required
+We can use one coin of 25 cents and one of 5 cents 
+Examples 2
+Input: coins[] = {9, 6, 5, 1}, V = 11
+Output: Minimum 2 coins required
+We can use one coin of 6 cents and 1 coin of 5 cents
