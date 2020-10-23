@@ -1,0 +1,47 @@
+# time - O(n) | space - O(n)
+
+def makeIntervals(intervals):
+  madeIntervals = intervals[:]
+  for i in range(len(madeIntervals)):
+    madeIntervals[i].append(i)
+  madeIntervals.sort()
+  firstProcEndTime = 0
+  secondProcEndTime = 0
+  for i in range(len(madeIntervals)):
+    if madeIntervals[i][0] >= firstProcEndTime:
+      madeIntervals[i].append("F")
+      firstProcEndTime = madeIntervals[i][1]
+    elif madeIntervals[i][0] >= secondProcEndTime:
+      madeIntervals[i].append("S")
+      secondProcEndTime = madeIntervals[i][1]
+    else:
+      return -1
+  res = [0 for _ in range(len(madeIntervals))]
+  for i in range(len(madeIntervals)):
+    ind = madeIntervals[i][2]
+    res[ind] = madeIntervals[i][3]
+  return res
+
+
+intervals = [[99, 150], [1, 100], [100, 301], [2, 5], [150, 250]]
+print(makeIntervals(intervals))
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Problem 1: Make the intervals non-overlapping by assigning them to two different processors
+Given a list of intervals interval[] where each interval contains two integers L and R, the task is to assign intervals to two different processors such that there are no overlapping intervals for each processor. To assign the interval[i] to the first processor, print “F” and to assign it to the second processor, print “S”.
+Note: If there is no possible solution print -1.
+Example1:
+Input: interval[] = {{360, 480}, {420, 540}, {600, 660}}
+Output: S, F, S
+Explanation:
+The intervals assigned to processors are –
+Intervals of First Processor {{420, 540}}
+Intervals of Second Processor {{360, 480}, {600, 660}}
+As there are no overlapping intervals for each processor, it will be a valid solution.
+Example2:
+Input: interval[] = {{99, 150}, {1, 100}, {100, 301}, {2, 5}, {150, 250}}
+Output: S, F, F, S, S
+Explanation:
+The intervals assigned to processors are –
+Intervals of First Processor {{1, 100}, {100, 301}}
+Intervals of Second Processor {{99, 150}, {2, 5}, {150, 250}}
+As there are no overlapping intervals for each processor, it will be a valid solution.
