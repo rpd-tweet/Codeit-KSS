@@ -1,0 +1,29 @@
+# 2sum
+# time - O(N) | space - O(N)
+def twoNumberSum(arr, target):
+  nums = {}
+  for i in arr:
+    if target - i in nums:
+      return [target - i, i]
+    else:
+      nums[i] = True
+  return []
+
+# time - O(nlogn) | space - O(n)
+def twoNumberSum(arr, target):
+  arr.sort()
+  left = 0
+  right = len(arr) - 1
+  while left < right:
+    currSum = arr[left] + arr[right]
+    if currSum == target:
+      return [arr[left], arr[right]]
+    elif currSum < target:
+      left += 1
+    elif currSum > target:
+      right -= 1
+  return []
+
+arr = list(map(int, input().split()))
+target = int(input())
+print(twoNumberSum(arr, target))
