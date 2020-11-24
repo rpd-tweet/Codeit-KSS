@@ -1,0 +1,16 @@
+# CountingWaysToReachTopOfStair
+# Time - O(n) | space - O(1)
+
+def CountWays(n):
+    if n == 1:
+        return 1
+    frst = 1
+    scnd = 2
+    for i in range(3, n+1):
+        thrd = frst + scnd
+        frst = scnd
+        scnd = thrd
+    return scnd
+    
+n = int(input())
+print(CountWays(n))
