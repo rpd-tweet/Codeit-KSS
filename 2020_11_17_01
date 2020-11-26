@@ -1,0 +1,26 @@
+# find min coins
+# time - O(1) | space - O(1)
+
+'''
+. Find the least number of coins required that can make any desired amount. The coins can only be pennies(1), nickels(5), dimes(10) and quarters(25).
+Sample Input 1: 30
+Sample Output 1: 2 (one quarter and one nickel)
+Sample Input 2: 100
+Sample Output 2: 4 (four quarters)
+'''
+
+def findMinCoins(amount):
+    coins = 0
+    coins += amount // 25
+    amount %= 25
+    coins += amount // 10
+    amount %= 10
+    coins += amount // 5
+    amount %= 5
+    coins += amount // 1
+
+    return coins
+    
+
+amount = 101
+print(findMinCoins(amount))
