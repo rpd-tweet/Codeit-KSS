@@ -33,7 +33,6 @@ Constraints:
 0 ≤ grantsArray.length ≤ 20
 0 ≤ grantsArray[i]
 [input] double newBudget
-
 [output] double
 '''
 
