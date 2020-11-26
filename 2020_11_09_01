@@ -1,0 +1,31 @@
+# check triplets
+# time - O(n^2) | space - O(n)
+
+'''
+Problem 1
+Given an array of integers, write a function that returns true if there is a triplet (a, b, c) that satisfies a2 + b2 = c2.
+Input: arr[] = {3, 1, 4, 6, 5}
+Output: True
+There is a Pythagorean triplet (3, 4, 5).
+Input: arr[] = {10, 4, 6, 12, 5}
+Output: False
+There is no Pythagorean triplet.
+'''
+
+def twoNumberSum(arr, target):
+  nums = {}
+  for i in arr:
+    if target - i**2 in nums:
+      return True
+    else:
+      nums[i**2] = True
+  return False
+
+def checkTriplets(arr):
+    for i in arr:
+        if twoNumberSum(arr, i**2):
+            return True
+    return False
+    
+array = [3, 1, 4, 6, 5]
+print(checkTriplets(array))
